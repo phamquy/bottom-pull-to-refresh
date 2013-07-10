@@ -36,7 +36,7 @@ CGFloat const kAnimationDuration = 0.2f;
 /*
  * Table view which p-t-r view will be added
  */
-@property (nonatomic, readwrite, weak) UITableView *table;
+@property (nonatomic, readwrite, weak) UIScrollView *table;
 
 /*
  * Client object that observes changes
@@ -65,7 +65,9 @@ CGFloat const kAnimationDuration = 0.2f;
 /*
  * Initializes the manager object with the information to link view and table
  */
-- (id)initWithPullToRefreshViewHeight:(CGFloat)height tableView:(UITableView *)table withClient:(id<MNMBottomPullToRefreshManagerClient>)client {
+//- (id)initWithPullToRefreshViewHeight:(CGFloat)height tableView:(UITableView *)table withClient:(id<MNMBottomPullToRefreshManagerClient>)client {
+
+- (id)initWithPullToRefreshViewHeight:(CGFloat)height tableView:(UIScrollView *)table withClient:(id<MNMBottomPullToRefreshManagerClient>)client {
 
     if (self = [super init]) {
         
@@ -90,10 +92,12 @@ CGFloat const kAnimationDuration = 0.2f;
     if ([table_ contentSize].height < CGRectGetHeight([table_ frame])) {
         
         offset = -[table_ contentOffset].y;
+        NSLog(@"offset 1: %.2f", offset);
         
     } else {
         
         offset = ([table_ contentSize].height - [table_ contentOffset].y) - CGRectGetHeight([table_ frame]);
+        NSLog(@"offset 2: %.2f", offset);
     }
     
     return offset;
